@@ -58,6 +58,13 @@ const Header = () => {
         }
     };
 
+    const scrollToSection = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <motion.header
             className="bg-white dark:bg-gray-800 shadow-md fixed w-full z-10"
@@ -65,22 +72,22 @@ const Header = () => {
             initial="hidden"
             animate="visible"
         >
-            <nav className="w-full px-4 py-3">
+            <nav className="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
                 <div className="flex justify-between items-center max-w-7xl mx-auto">
-                    <motion.a
-                        href="#hero"
-                        className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white cursor-pointer"
+                    <motion.button
+                        className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 dark:text-white cursor-pointer"
                         variants={itemVariants}
                         whileHover="hover"
+                        onClick={() => scrollToSection('hero')}
                     >
                         Vishwanath
-                    </motion.a>
-                    <div className="hidden md:flex space-x-6 items-center">
+                    </motion.button>
+                    <div className="hidden lg:flex space-x-4 xl:space-x-6 items-center">
                         {navItems.map((item) => (
                             <motion.a
                                 key={item.name}
                                 href={item.href}
-                                className="text-lg md:text-xl text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition duration-300"
+                                className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition duration-300"
                                 variants={itemVariants}
                                 whileHover="hover"
                             >
@@ -93,17 +100,17 @@ const Header = () => {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            {darkMode ? <FiSun size={24} /> : <FiMoon size={24} />}
+                            {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
                         </motion.button>
                     </div>
-                    <div className="md:hidden flex items-center">
+                    <div className="lg:hidden flex items-center">
                         <motion.button
                             onClick={toggleDarkMode}
                             className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 mr-2"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            {darkMode ? <FiSun size={24} /> : <FiMoon size={24} />}
+                            {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
                         </motion.button>
                         <motion.button
                             onClick={() => setIsOpen(!isOpen)}
@@ -111,13 +118,13 @@ const Header = () => {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+                            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                         </motion.button>
                     </div>
                 </div>
                 {isOpen && (
                     <motion.div
-                        className="mt-4 md:hidden"
+                        className="mt-4 lg:hidden"
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -126,7 +133,7 @@ const Header = () => {
                             <motion.a
                                 key={item.name}
                                 href={item.href}
-                                className="block py-2 text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition duration-300"
+                                className="block py-2 text-base sm:text-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition duration-300"
                                 onClick={() => setIsOpen(false)}
                                 variants={itemVariants}
                                 initial="hidden"

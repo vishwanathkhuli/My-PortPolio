@@ -67,18 +67,19 @@ const Hero = () => {
     }, [controls]);
 
     return (
-        <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden pt-16">
+        <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden pt-16 px-4 sm:px-6 lg:px-8">
             <motion.div
-                className="container mx-auto px-4 text-center"
+                className="w-full max-w-7xl mx-auto text-center"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
             >
                 <motion.div
                     key={key}
-                    className="text-5xl md:text-7xl font-bold mb-6 text-yellow-600 dark:text-yellow-300 drop-shadow-2xl transition-transform duration-300 ease-in-out"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-yellow-600 dark:text-yellow-300 drop-shadow-2xl transition-transform duration-300 ease-in-out"
                     style={{
                         display: 'flex',
+                        flexWrap: 'wrap',
                         justifyContent: 'center',
                         textShadow: "0 0 10px rgba(255,215,0,0.6), 0 0 20px rgba(255,215,0,0.4), 0 0 30px rgba(255,215,0,0.2)"
                     }}
@@ -88,8 +89,8 @@ const Hero = () => {
                             key={index}
                             initial={{
                                 opacity: 0,
-                                x: Math.random() * 1000 - 500,
-                                y: Math.random() * 1000 - 500,
+                                x: Math.random() * 500 - 250,
+                                y: Math.random() * 500 - 250,
                                 rotate: Math.random() * 360
                             }}
                             animate={{
@@ -115,7 +116,7 @@ const Hero = () => {
                     ))}
                 </motion.div>
                 <motion.h2
-                    className="text-2xl md:text-3xl mb-8 text-gray-700 dark:text-gray-300 font-semibold h-12"
+                    className="text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8 text-gray-700 dark:text-gray-300 font-semibold h-12"
                     variants={itemVariants}
                     whileHover="hover"
                 >
@@ -130,14 +131,14 @@ const Hero = () => {
                     />
                 </motion.h2>
                 <motion.p
-                    className="text-xl mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+                    className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
                     variants={itemVariants}
                     whileHover="hover"
                 >
                     Crafting innovative, scalable, and user-centric web solutions that transform ideas into digital realities
                 </motion.p>
                 <motion.div
-                    className="flex justify-center space-x-6 mb-16"
+                    className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-16"
                     variants={itemVariants}
                 >
                     <SocialLink href="https://www.linkedin.com/in/yourprofile" icon={FiLinkedin} label="LinkedIn" />
@@ -147,7 +148,7 @@ const Hero = () => {
                     <SocialLink href="https://www.hirist.com/profile/" icon={FiBriefcase} label="Hirist" />
                 </motion.div>
                 <motion.div
-                    className="flex flex-wrap justify-center items-center gap-8"
+                    className="flex flex-wrap justify-center items-center gap-4 sm:gap-8"
                     variants={itemVariants}
                 >
                     <Button href="#projects">
@@ -172,14 +173,14 @@ const SocialLink = ({ href, icon: Icon, label }) => (
         whileHover={{ scale: 1.2, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
     >
-        <Icon size={32} />
+        <Icon size={24} className="sm:w-8 sm:h-8" />
     </motion.a>
 );
 
 const Button = ({ href, children }) => (
     <motion.a
         href={href}
-        className="font-bold py-3 px-8 rounded-full transition-all duration-300 bg-blue-600 text-white hover:bg-blue-700 border-2 border-blue-600 hover:border-blue-700"
+        className="font-bold py-2 px-4 sm:py-3 sm:px-8 rounded-full transition-all duration-300 bg-blue-600 text-white hover:bg-blue-700 border-2 border-blue-600 hover:border-blue-700 text-sm sm:text-base"
         whileHover={{
             scale: 1.05,
             boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",

@@ -1,23 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
 const ProjectCard = ({ title, description, tech, github, demo, image }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const { darkMode } = useTheme();
+
+    useEffect(() => {
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkIfMobile();
+        window.addEventListener('resize', checkIfMobile);
+
+        return () => window.removeEventListener('resize', checkIfMobile);
+    }, []);
 
     return (
         <motion.div
             className={`bg-gradient-to-r ${darkMode ? 'from-blue-600 to-purple-700' : 'from-blue-400 to-purple-500'} rounded-xl shadow-lg overflow-hidden relative`}
             style={{ aspectRatio: '1.586' }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: isMobile ? 1 : 1.05 }}
+            whileTap={{ scale: isMobile ? 1 : 0.95 }}
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
+            onHoverStart={() => !isMobile && setIsHovered(true)}
+            onHoverEnd={() => !isMobile && setIsHovered(false)}
         >
             <motion.img
                 src={image}
@@ -28,38 +40,38 @@ const ProjectCard = ({ title, description, tech, github, demo, image }) => {
                 transition={{ delay: 0.2 }}
             />
             <AnimatePresence>
-                {isHovered && (
+                {(isHovered || isMobile) && (
                     <motion.div
-                        className={`absolute inset-0 ${darkMode ? 'bg-black bg-opacity-85' : 'bg-white bg-opacity-90'} p-6 flex flex-col justify-between`}
+                        className={`absolute inset-0 ${darkMode ? 'bg-black bg-opacity-85' : 'bg-white bg-opacity-90'} p-4 sm:p-6 flex flex-col justify-between`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                     >
                         <div>
-                            <h3 className={`text-xl font-semibold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>{title}</h3>
-                            <p className={`${darkMode ? 'text-gray-200' : 'text-gray-600'} mb-4 text-sm`}>{description}</p>
-                            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-500'} mb-4 text-sm`}>
+                            <h3 className={`text-lg sm:text-xl font-semibold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>{title}</h3>
+                            <p className={`${darkMode ? 'text-gray-200' : 'text-gray-600'} mb-2 sm:mb-4 text-xs sm:text-sm`}>{description}</p>
+                            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-500'} mb-2 sm:mb-4 text-xs sm:text-sm`}>
                                 <strong>Technologies:</strong> {tech}
                             </p>
                         </div>
-                        <div className="flex space-x-4">
+                        <div className="flex flex-wrap gap-2 sm:gap-4">
                             <a
                                 href={github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`flex items-center ${darkMode ? 'text-white hover:text-gray-200 bg-blue-600' : 'text-white hover:text-gray-100 bg-blue-500'} px-3 py-1 rounded-full text-sm`}
+                                className={`flex items-center ${darkMode ? 'text-white hover:text-gray-200 bg-blue-600' : 'text-white hover:text-gray-100 bg-blue-500'} px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm`}
                             >
-                                <FiGithub className="mr-2" /> GitHub
+                                <FiGithub className="mr-1 sm:mr-2" /> GitHub
                             </a>
                             {demo && (
                                 <a
                                     href={demo}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`flex items-center ${darkMode ? 'text-white hover:text-gray-200 bg-green-600' : 'text-white hover:text-gray-100 bg-green-500'} px-3 py-1 rounded-full text-sm`}
+                                    className={`flex items-center ${darkMode ? 'text-white hover:text-gray-200 bg-green-600' : 'text-white hover:text-gray-100 bg-green-500'} px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm`}
                                 >
-                                    <FiExternalLink className="mr-2" /> Live Demo
+                                    <FiExternalLink className="mr-1 sm:mr-2" /> Live Demo
                                 </a>
                             )}
                         </div>
@@ -110,14 +122,14 @@ const Projects = () => {
     return (
         <motion.section
             id="projects"
-            className={`py-20 ${darkMode ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-gray-100 to-gray-200'}`}
+            className={`py-12 sm:py-20 ${darkMode ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-gray-100 to-gray-200'}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
         >
             <div className="container mx-auto px-4">
                 <motion.h2
-                    className={`text-3xl font-bold mb-8 text-center ${darkMode ? 'text-white' : 'text-gray-800'}`}
+                    className={`text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center ${darkMode ? 'text-white' : 'text-gray-800'}`}
                     initial={{ y: -50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
@@ -125,7 +137,7 @@ const Projects = () => {
                     Projects
                 </motion.h2>
                 <motion.div
-                    className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+                    className="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4, duration: 0.5 }}
