@@ -85,6 +85,15 @@ const ProjectCard = ({ title, description, tech, github, demo, image }) => {
 const Projects = () => {
     const { darkMode } = useTheme();
     const projects = [
+
+        {
+            title: 'Quiz Master',
+            description: 'An interactive quiz application designed to test users knowledge across various topics. Features include multiple-choice questions, real-time scoring, and instant feedback, ensuring an engaging and responsive user experience.',
+            tech: 'Java, Spring Boot, React, Javascript, Mysql, Docker',
+            github: 'https://github.com/vishwanathkhuli/my-quiz-backend.git',
+            demo: 'https://quiz-demo-livid.vercel.app/',
+            image: 'https://github.com/vishwanathkhuli/my-quiz-backend/blob/main/Screenshot%20(108).png?raw=true'
+        },
         {
             title: 'E-Commerce-Landing-Pages',
             description: 'Designed and developed the front-end of a responsive e-commerce website, focusing on user experience and interface design.',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import { FiLinkedin, FiGithub, FiMail, FiBriefcase } from 'react-icons/fi';
+import { FiLinkedin, FiGithub, FiMail } from 'react-icons/fi';
 import Typewriter from 'typewriter-effect';
 
 const Hero = () => {
@@ -15,19 +15,6 @@ const Hero = () => {
                 delay: 0.3,
                 when: "beforeChildren",
                 staggerChildren: 0.2
-            }
-        }
-    };
-
-    const nameVariants = {
-        hidden: { y: -50, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                type: "tween",
-                stiffness: 120,
-                damping: 10
             }
         }
     };
@@ -141,11 +128,9 @@ const Hero = () => {
                     className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 sm:mb-16"
                     variants={itemVariants}
                 >
-                    <SocialLink href="https://www.linkedin.com/in/yourprofile" icon={FiLinkedin} label="LinkedIn" />
+                    <SocialLink href="https://www.linkedin.com/in/vishwanath-khuli-068ab526b/" icon={FiLinkedin} label="LinkedIn" />
                     <SocialLink href="https://github.com/vishwanathkhuli" icon={FiGithub} label="GitHub" />
                     <SocialLink href="mailto:vishwanathkhuli347@gmail.com" icon={FiMail} label="Email" />
-                    <SocialLink href="https://www.naukri.com/mnjuser/profile" icon={FiBriefcase} label="Naukri" />
-                    <SocialLink href="https://www.hirist.com/profile/" icon={FiBriefcase} label="Hirist" />
                 </motion.div>
                 <motion.div
                     className="flex flex-wrap justify-center items-center gap-4 sm:gap-8"
